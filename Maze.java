@@ -9,6 +9,7 @@ import java.util.Random;
 * @author Tyler Brennan
 */
 public class Maze{
+  public static Maze maze;
   public final int col;
   public final int row;
   public Cell[][] cells;
@@ -95,8 +96,8 @@ public class Maze{
   }
 
   public static void main(String[] args){
-    Maze maze = new Maze();
-    DrawMaze draw = new DrawMaze(maze);
+    maze = new Maze();
+    DrawMaze draw = new DrawMaze();
     maze.generateMaze();
   }
 }
