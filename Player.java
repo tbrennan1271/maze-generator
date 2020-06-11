@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 public class Player implements KeyListener{
   public int x;
   public int y;
+  public int count;
   private char[] input;
 
   /**
@@ -15,6 +16,7 @@ public class Player implements KeyListener{
   public Player(){
     x = Maze.maze.cells[0][0].x;
     y = Maze.maze.cells[0][0].y;
+    count = 0;
     input = new char[] {'w', 'd', 's', 'a'};
   }
 
@@ -39,15 +41,19 @@ public class Player implements KeyListener{
     System.out.println("Pressed " + (int)e.getKeyChar());
     if(key == input[0] && y > 0 && checkWalls(0)){                    // North ('w')
       y -= 1;
+      count += 1;
       System.out.println(x + ", " + y);
     } if(key == input[1] && x < Maze.maze.col - 1 && checkWalls(1)){  // East ('d')
       x += 1;
+      count += 1;
       System.out.println(x + ", " + y);
     } if(key == input[2] && y < Maze.maze.row - 1 && checkWalls(2)){  // South ('s')
       y += 1;
+      count += 1;
       System.out.println(x + ", " + y);
     } if(key == input[3] && x > 0 && checkWalls(3)){                  // West ('a')
       x -= 1;
+      count += 1;
       System.out.println(x + ", " + y);
     }
   }
@@ -63,5 +69,17 @@ public class Player implements KeyListener{
     } else {
     return true;
     }
+  }
+
+  /**
+  * Determines if the player is located in the bottom right corner, which
+  * is the end of the maze
+  * @return boolean   boolean value of if the player has reached the end
+  */
+  public boolean checkWin(){
+    if(x == Maze.maze.col - 1 && y == Maze.maze.row - 1){
+      return true;
+    }
+    return false;
   }
 }

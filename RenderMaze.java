@@ -17,6 +17,7 @@ public class RenderMaze extends JPanel{
   private int offset;
   private int width;
   private int height;
+  private int textSpace;
   private Cell current;
 
   /**
@@ -25,10 +26,11 @@ public class RenderMaze extends JPanel{
   public RenderMaze() {
     current = Maze.maze.cells[0][0]; // Starting point for player
     player = new Player();
+    textSpace = 150;
     offset = 10;
-    dimX = 400;
-    dimY = 400;
-    width = (dimX - offset * 2) / Maze.maze.col;
+    dimX = 700;
+    dimY = 500;
+    width = (dimX - textSpace - offset * 2) / Maze.maze.col;
     height = (dimY - offset * 2) / Maze.maze.row;
   }
 
@@ -45,6 +47,7 @@ public class RenderMaze extends JPanel{
   */
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
+    drawText(g);
     // Create walls for each cell
     for(int i = 0; i < Maze.maze.col; i ++){
       for(int j = 0; j < Maze.maze.row; j++){
@@ -62,6 +65,16 @@ public class RenderMaze extends JPanel{
         }
         g.fillRect((player.x  * width) + (width/3) + offset, (player.y * height) + (height/3) + offset, width/3, height/3);
       }
+    }
+  }
+
+  private void drawText(Graphics g){
+    g.drawString("The w, s, a, and d", dimX - textSpace, 25);
+    g.drawString("keys are used to move.", dimX - textSpace, 45);
+    g.drawString("Number of moves: " + player.count, dimX - textSpace, 75);
+    if(player.checkWin()){
+      g.drawString("Congratulations!", dimX - textSpace, 105);
+      g.drawString("You have won!", dimX - textSpace, 125);
     }
   }
 }

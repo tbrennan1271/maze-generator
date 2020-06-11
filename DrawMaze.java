@@ -21,15 +21,23 @@ public class DrawMaze{
   public DrawMaze(){
     RenderMaze render = new RenderMaze();
     JFrame window = new JFrame("Maze - Tyler Brennan");
-    Timer timer = new Timer(200, new ActionListener() { // Timer to update the JPanel
-        // @Override
+    Timer timer = new Timer(100, new ActionListener() { // Timer to update the JPanel
+
+        /**
+        * Every time the timer is triggered, repaint the pannel or stop the
+        * timer depending on if the win condition is met
+        * @param e    ActionEvent from each time the timer is triggered
+        */
         public void actionPerformed(ActionEvent e) {
           render.repaint();
+          if(render.player.checkWin()){
+            ((Timer)e.getSource()).stop();
+          }
         }
     });
     timer.start();
-
     window.setVisible(true);
+    window.setResizable(false);
     window.setDefaultCloseOperation(window.EXIT_ON_CLOSE);
     render.addKeyListener(render.player);
     render.setFocusable(true);

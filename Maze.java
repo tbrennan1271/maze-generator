@@ -18,8 +18,8 @@ public class Maze{
   * Constructor to initialize the 2D array and fills it with all the cells
   */
   public Maze(){
-    col = 20;
-    row = 20;
+    col = 10;
+    row = 10;
     cells = new Cell[col][row];
     fillCells();
   }
@@ -95,6 +95,10 @@ public class Maze{
     cells[col - 1][row - 1].walls[2] = false; // Clear the south wall of the opposite corner to end
   }
 
+  /**
+  * Main block of code which generates the maze and uses DrawMaze to allow the user
+  * to traverse the maze
+  */
   public static void main(String[] args){
     maze = new Maze();
     DrawMaze draw = new DrawMaze();
